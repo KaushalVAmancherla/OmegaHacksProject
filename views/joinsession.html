@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="screen.css"> 
+
+		<title>Testy</title>
+	</head>
+
+	<body>
+		<nav>
+			<a href="/">Back to home</a>
+		</nav>
+
+		<div class="title">
+			<h1>Get ready to join the session <%= name%>!</h1>
+		</div>
+
+		<table>
+			<tr>
+				<td> 
+					Video Link 
+				</td>
+					
+				<td> 
+					<a href="<%= zoomlink %>"><%= zoomlink %></a>
+				</td>
+			</tr>
+		</table>
+
+		<form action="/sharedviewstudent" method="post">
+			<input type="hidden" id="name" name="name" value="<%= name%>">
+			<input type="submit" value="Join Session">
+		</form>			
+
+	</body>
+</html>

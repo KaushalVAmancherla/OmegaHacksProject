@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="screen.css"> 
+
+		<title>Testy</title>
+	</head>
+
+	<body>
+
+		<nav><a href="/">Back to home</a></nav>
+		<div class="title"><h1>Create Test</h1></div>
+
+
+		<form action="/teacherhome" method="post">
+
+			<table id="questiontable">
+				<tr>
+					<th>Question</th>
+					<th>Choice 1</th>
+					<th>Choice 2</th>
+					<th>Choice 3</th>
+					<th>Choice 4</th>
+					<th>Answer</th>
+				</tr>
+			</table>
+			<a href="#" id="addquestion" onclick="add()">Add Question</a>
+
+			<script>
+
+				function add() {
+					  var table = document.getElementById("questiontable");
+					  var row = table.insertRow(table.rows.length);
+
+					  row.insertCell(0).innerHTML = "<input type='text' name=Q>";
+					  row.insertCell(1).innerHTML = "<input type='text' name=C1>";
+					  row.insertCell(2).innerHTML = "<input type='text' name=C2>";
+					  row.insertCell(3).innerHTML = "<input type='text' name=C3>";
+					  row.insertCell(4).innerHTML = "<input type='text' name=C4>";
+					  row.insertCell(5).innerHTML = "<select name='chosen'> <option name='C1'>Choice 1</option><option name='C2'>Choice 2</option><option name='C3'>Choice 3</option><option name='C4'>Choice 4</option> </select>";
+				}
+
+			</script>
+			
+	  		<button type="submit" id="nextbutton">Next</button>
+
+		</form>
+
+	</body>
+</html>

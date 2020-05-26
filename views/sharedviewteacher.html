@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="screen.css"> 
+
+		<title>Testy</title>
+
+		<script>
+			var shown = false;
+
+			function displaytime(){
+				current_time=setTimeout('displaytime2()',1000);
+			}
+
+			function displaytime2(){
+				var x = new Date()
+				document.getElementById('count').innerHTML = x.toLocaleString('en-US', { hour12: true })
+
+				/*x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds();
+				displaytime();*/
+				displaytime();
+				if(!shown)
+				{
+					add();
+					shown = true;
+				}		
+				var formatted = "<%= deadline %>";
+				var xx = formatted.split(',');
+				var yy = xx[1]+'';
+				var zz = yy.split(':');
+				var mm = zz[1];
+
+				if (x.getMinutes()>=mm)
+				{
+					document.getElementById('results-form').submit();
+				}
+			}
+		</script>
+	</head>
+
+	<body onload=displaytime2()>
+		<h1>Teacher Dashboard</h1>
+		
+		<table>
+			<tr>
+				<td>
+					Test Duration: 
+				</td>
+
+				<td>
+					<%= time %> minutes
+				</td>	
+			</tr>
+
+			<tr>
+				<td>
+					Deadline: 
+				</td>
+
+				<td>
+					<%= deadline %>
+				</td>	
+			</tr>
+
+			<tr>
+				<td>
+				Current Time: 
+				</td>
+
+				<td>
+					<span id="count"></span>
+				</td>	
+			</tr>
+		</table>
+
+
+		<table id="stutable">
+			<tr>
+				<th>
+					Students taking test
+				</th>
+			</tr>
+		</table>
+
+		<script>
+				function add() {
+					  var table = document.getElementById("stutable");
+					  var student = "<%= students %>";
+
+					  var studentsplit = student.split(',');
+					
+					  for(let i=0;i<studentsplit.length;i++)
+					  {
+					  	  var row = table.insertRow(table.rows.length);
+						  row.insertCell(0).innerHTML = studentsplit[i];
+					  }
+				}
+		</script>
+
+		<form action="/refreshdash" method="post">
+			<input type="hidden" name="time" value="<%= time %>"> 
+			<input type="hidden" name="deadline" value="<%= deadline %>"> 
+			<input type="submit" value="Reresh">
+	  	</form>
+
+		<form id="results-form" action="/teacherresult" method="post">
+	  		<button type="submit" id="endtestbutton">End Test</button>
+	  	</form>
+
+	</body>	
+</html>

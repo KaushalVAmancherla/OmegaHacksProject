@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="screen.css"> 
+
+		<title>Testy</title>
+	</head>
+
+	<body>
+		<nav>
+			<a href="/">Back to home</a>
+		</nav>
+
+		<div class="title">
+			<h1>Share with your students the following: </h1>
+		</div>
+
+		<h2>
+			<table>
+				<tr>
+					<td> 
+						Video Link 
+					</td>
+					
+					<td> 
+						<a href="<%= zoomlink %>"><%= zoomlink %></a>
+					</td>
+				</tr>
+
+				<tr>
+					<td> Class Code </td>
+					<td> <%= classcode %> </td>
+				</tr>
+			</table>
+
+			<form action="/sharedviewteacher" method="post">
+					<input type="hidden" name="started" value="yes"> 
+					<input type="submit" value="Start Test">
+			</form>			
+
+		</h2>
+	</body>
+</html>

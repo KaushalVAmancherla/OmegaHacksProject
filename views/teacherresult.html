@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="screen.css"> 
+
+		<title>Testy</title>
+	</head>
+
+	<body onload=add()>
+		<div class="title"><h1>Results</h1></div>	
+
+		<table id="resultstable">
+			<tr>
+				<th>Name</th>
+				<th>Number of questions</th>
+				<th>Correct Answers</th>
+				<th>Wrong Answers</th>
+				<th>Grade</th>
+			</tr>
+		</table>	
+
+		<script>
+				function add() {
+					  var table = document.getElementById("resultstable");
+					  var student = "<%= studentresult%>";
+
+					  var studentsplit = student.split('|');
+					
+					  for(let i=0;i<studentsplit.length;i++)
+					  {
+					  	  var row = table.insertRow(table.rows.length);
+					  	  var columnsplit = studentsplit[i].split(',');
+
+						  row.insertCell(0).innerHTML = columnsplit[0];
+						  row.insertCell(1).innerHTML = columnsplit[1];
+						  row.insertCell(2).innerHTML = columnsplit[2];
+						  row.insertCell(3).innerHTML = columnsplit[3];
+						  row.insertCell(4).innerHTML = columnsplit[4] +'%';
+					  }
+				}
+		</script>
+
+		<form action="/" method="get">
+			<input type="submit" value="Exit" id="exitbutton">
+		</form>
+
+	</body>
+</html>

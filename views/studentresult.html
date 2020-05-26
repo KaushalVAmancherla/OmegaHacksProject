@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="screen.css"> 
+
+		<title>Testy</title>
+	</head>
+
+	<body>
+		<div class="title"><h1>Results</h1></div>
+
+		<table id="resultstable">
+			<tr>
+				<th>Name</th>
+				<th>Number of questions</th>
+				<th>Correct Answers</th>
+				<th>Wrong Answers</th>
+				<th>Grade</th>
+			</tr>
+			<tr>
+				<th><%= name%></th>
+				<th><%= total%></th>
+				<th><%= score%></th>
+				<th><%= incorrect%></th>
+				<th><%= grade%>%</th>
+			</tr>
+		</table>		
+
+		<form action="/" method="get">
+			<input type="submit" value="Exit" id="exitbutton">
+		</form>
+
+	</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="screen.css"> 
+
+		<title>Testy</title>
+
+		<script>
+			var shown = false;
+
+			function displaytime(){
+				current_time=setTimeout('displaytime2()',1000);
+			}
+
+			function displaytime2(){
+				var x = new Date()
+				document.getElementById('count').innerHTML = x.toLocaleString('en-US', { hour12: true })
+
+				/*x.getHours() + ":" + x.getMinutes() + ":" + x.getSeconds();
+				displaytime();*/
+				displaytime();
+				if(!shown)
+				{
+					add();
+					shown = true;
+				}
+
+				var formatted = "<%= deadline %>";
+				var xx = formatted.split(',');
+				var yy = xx[1]+'';
+				var zz = yy.split(':');
+				var mm = zz[1];
+
+				if (x.getMinutes()>=mm)
+				{
+					document.getElementById('answer-form').submit();
+				}
+			}
+		</script>
+	</head>
+
+	<body onload=displaytime2()>
+		<h1>Student Dashboard</h1>
+
+		<table>
+			<tr>
+				<td>
+					Test Duration: 
+				</td>
+
+				<td>
+					<%= time %> minutes
+				</td>	
+			</tr>
+
+			<tr>
+				<td>
+					Deadline: 
+				</td>
+
+				<td>
+					<%= deadline %>
+				</td>	
+			</tr>
+
+			<tr>
+				<td>
+				Current Time: 
+				</td>
+
+				<td>
+					<span id="count"></span>
+				</td>	
+			</tr>
+		</table>
+
+
+		<form id="answer-form" action="/studentresult" method="post">
+
+			<table id="questiontable">
+				<tr>
+					<th>Question</th>
+					<th>Choice 1</th>
+					<th>Choice 2</th>
+					<th>Choice 3</th>
+					<th>Choice 4</th>
+					<th>Answer</th>
+				</tr>
+			</table>
+
+			<script>
+
+				function add() {
+					  var table = document.getElementById("questiontable");
+
+					  var question = "<%= Q%>";
+					  var choice1 = "<%= c1%>";
+					  var choice2 = "<%= c2%>";
+					  var choice3 = "<%= c3%>";
+					  var choice4 = "<%= c4%>";
+
+					  var questionsplit = question.split(',');
+					  var choice1split = choice1.split(',');
+					  var choice2split = choice2.split(',');
+					  var choice3split = choice3.split(',');
+					  var choice4split = choice4.split(',');
+
+					  for(let i=0;i<questionsplit.length;i++)
+					  {
+					  		var row = table.insertRow(table.rows.length);
+
+						  row.insertCell(0).innerHTML = questionsplit[i];
+						  row.insertCell(1).innerHTML = choice1split[i];
+						  row.insertCell(2).innerHTML = choice2split[i];
+						  row.insertCell(3).innerHTML = choice3split[i];
+						  row.insertCell(4).innerHTML = choice4split[i];
+						  row.insertCell(5).innerHTML = "<select name='chosen'> <option name='select'>Select</option><option name='C1'>Choice 1</option><option name='C2'>Choice 2</option><option name='C3'>Choice 3</option><option name='C4'>Choice 4</option> </select>";
+					  }
+				}
+
+			</script>
+
+			<input type="hidden" id="name" name="name" value="<%= name%>">
+	  		<button type="submit" id="submitbutton">Submit</button>
+
+		</form>
+
+	</body>
+</html>
